@@ -1,49 +1,49 @@
 (********************************************************)
-(*  Inférence de types polymorphes en Caml				      *)
-(*  Interpreteur: Caml Light							              *)
-(*	Version: 1.0 Build: 1132.160112						          *)
-(*														                          *)
-(* 	Cpyright BABIC Benjamin, (2010) 					          *)
-(*  benjamin.babic@homail.fr							              *)
-(*														                          *)
+(*	Inférence de types polymorphes en Caml				*)
+(*  Interpreteur: Caml Light							*)
+(*	Version: 1.0 Build: 1132.160112						*)
+(*														*)
+(* 	Cpyright BABIC Benjamin, (2010) 					*)
+(*  benjamin.babic@homail.fr							*)
+(*														*)
 (*  Ce logiciel est un programme informatique servant 	*)
-(*  à inférer des types en caml. 						            *)
-(*  Ce logiciel est régi par la licence CeCILL-C 		    *)
-(*	soumise au droit français et respectant les 		    *)
-(*	principes de diffusion des logiciels libres. 		    *)
+(*  à inférer des types en caml. 						*)
+(*  Ce logiciel est régi par la licence CeCILL-C 		*)
+(*	soumise au droit français et respectant les 		*)
+(*	principes de diffusion des logiciels libres. 		*)
 (*	Vous pouvez	utiliser, modifier et/ou redistribuer 	*)
-(*	ce programme sous les conditions de la licence 		  *)
-(*	CeCILL-C telle que diffusée par le CEA, le CNRS 	  *)
-(*	et l'INRIA sur le site "http://www.cecill.info".	  *)
-(*														                          *)
+(*	ce programme sous les conditions de la licence 		*)
+(*	CeCILL-C telle que diffusée par le CEA, le CNRS 	*)
+(*	et l'INRIA sur le site "http://www.cecill.info".	*)
+(*														*)
 (*  En contrepartie de l'accessibilité au code source 	*)
-(*  et des droits de copie, de modification et de 		  *)
+(*  et des droits de copie, de modification et de 		*)
 (*  redistribution accordés par cette licence, il n'est *)
 (*  offert aux utilisateurs qu'une garantie limitée.  	*)
 (*  Pour les mêmes raisons, seule une responsabilité  	*)
-(*  restreinte pèse sur l'auteur du programme, le		    *)
-(*  titulaire des droits patrimoniaux et les 			      *)
-(*  concédants successifs.							             	  *)
-(*  A cet égard  l'attention de l'utilisateur est 	    *)
-(*  attirée sur les risques associés au chargement,  	  *)
-(*  à l'utilisation,  à la modification et/ou au 		    *)
+(*  restreinte pèse sur l'auteur du programme, le		*)
+(*  titulaire des droits patrimoniaux et les 			*)
+(*  concédants successifs.								*)
+(*  A cet égard  l'attention de l'utilisateur est 		*)
+(*  attirée sur les risques associés au chargement,  	*)
+(*  à l'utilisation,  à la modification et/ou au 		*)
 (*  développement et à la reproduction du logiciel par 	*)
-(*  l'utilisateur étant donné sa spécificité de 	  	  *)
-(*  logiciel libre, qui peut le rendre complexe à 		  *)
+(*  l'utilisateur étant donné sa spécificité de 		*)
+(*  logiciel libre, qui peut le rendre complexe à 		*)
 (*  manipuler et qui le réserve donc à des développeurs *)
-(*  et des professionnels avertis possédant des  		    *)
-(*  connaissances informatiques approfondies. Les		    *)
-(*  utilisateurs sont donc invités à charger et 		    *)
-(*  tester l'adéquation du logiciel à leurs besoins 	  *)
-(*  dans des conditions permettant d'assurer la			    *)
+(*  et des professionnels avertis possédant des  		*)
+(*  connaissances informatiques approfondies. Les		*)
+(*  utilisateurs sont donc invités à charger et 		*)
+(*  tester l'adéquation du logiciel à leurs besoins 	*)
+(*  dans des conditions permettant d'assurer la			*)
 (*  sécurité de leurs systèmes et ou de leurs données 	*)
 (*  et, plus généralement, à l'utiliser et l'exploiter  *)
-(*  dans les mêmes conditions de sécurité. 				      *)
-(*  													                          *)
-(*  Le fait que vous puissiez accéder à cet en-tête 	  *)
-(*  signifie que vous avez pris connaissance de la 		  *)
-(*  licence CeCILL-C, et que vous en avez accepté les	  *)
-(*  termes.												                      *)
+(*  dans les mêmes conditions de sécurité. 				*)
+(*  													*)
+(*  Le fait que vous puissiez accéder à cet en-tête 	*)
+(*  signifie que vous avez pris connaissance de la 		*)
+(*  licence CeCILL-C, et que vous en avez accepté les	*)
+(*  termes.												*)
 (********************************************************)
 
 (*
@@ -84,8 +84,8 @@ let tp4 = Tfonc(Tconst "int",Tpaire(Tconst "int",Tconst "bool"));;
 
 
 (********************************************************) 
-(* Description: Définition d'une substitution 			    *)
-(* Trace: string*Tpoly list 							              *)
+(* Description: Définition d'une substitution 			*)
+(* Trace: string*Tpoly list 							*)
 (********************************************************)
 let sl1 = [("x",Tconst "int");("y",Tvar "x")];;
 let sl2 = [("x",Tpaire(Tconst "int",Tconst "bool"))];;
@@ -94,9 +94,9 @@ let sl2 = [("x",Tpaire(Tconst "int",Tconst "bool"))];;
 (********************************************************) 
 (* Description: Fonction qui a partir d'un Tpoly (Tvar  *)
 (* ou Tconst) renvoie son image dans la liste de substi *)
-(* tution. 												                      *)
-(* Exemple: img (Tvar x,sl1) renvoie Tconst int.		    *)
-(* Trace: tpoly * (string * tpoly) list -> tpoly 		    *)
+(* tution. 												*)
+(* Exemple: img (Tvar x,sl1) renvoie Tconst int.		*)
+(* Trace: tpoly * (string * tpoly) list -> tpoly 		*)
 (********************************************************) 
 let rec img = fun 
 (x,[])-> x
@@ -107,8 +107,8 @@ let rec img = fun
 
 (********************************************************) 
 (* Description: construit la fonction de substitution a *)
-(* partir de la définition. 							              *)
-(* Trace: (string * tpoly) list -> tpoly -> tpoly		    *)
+(* partir de la définition. 							*)
+(* Trace: (string * tpoly) list -> tpoly -> tpoly		*)
 (********************************************************) 
 let rec build_sub  =  fun l -> fun
 		(Tvar x) -> img(Tvar x,l)
@@ -130,9 +130,9 @@ s2 tp1;;
 
 (********************************************************) 
 (* Description: construit la subsitution obtenue par su *)
-(* bstitutions successives de s1 puis s2				        *)
-(* Trace: (tpoly -> tpoly) -> 							            *)
-(*		  (tpoly -> tpoly) -> tpoly -> tpoly   			      *)
+(* bstitutions successives de s1 puis s2				*)
+(* Trace: (tpoly -> tpoly) -> 							*)
+(*		  (tpoly -> tpoly) -> tpoly -> tpoly   			*)
 (********************************************************) 
 let compose_sub = fun (s1:tpoly->tpoly) -> fun (s2:tpoly->tpoly) -> fun tp -> s2 (s1 tp);;
 
@@ -153,9 +153,9 @@ III/ Unification
 
 (********************************************************) 
 (* Description: applique une substitution a un systeme 	*)
-(* d'equations représenté par une tpoly*tpoly list		  *)
-(* Trace: (tpoly -> tpoly) -> 						          	  *)
-(* (tpoly * tpoly) list -> (tpoly * tpoly) list 		    *)
+(* d'equations représenté par une tpoly*tpoly list		*)
+(* Trace: (tpoly -> tpoly) -> 							*)
+(* (tpoly * tpoly) list -> (tpoly * tpoly) list 		*)
 (********************************************************)
 let rec sub_eq = fun (s:tpoly->tpoly) -> fun
 [] -> []
@@ -178,7 +178,7 @@ sub_eq s1 eq;;
 (****************************************************************************************************) 
 
 (********************************************************) 
-(* Description: renvoie true si x est libre dans tp 	  *)
+(* Description: renvoie true si x est libre dans tp 	*)
 (********************************************************)
 let rec is_free = fun x -> fun
 (Tvar y) -> x<>y
@@ -196,8 +196,8 @@ is_free "y" tp1;;
 
 (********************************************************) 
 (* Description: revoie la chaine de caractère représen 	*)
-(* tant le tpoly 										                    *)
-(* Trace: tpoly -> string						 		                *)
+(* tant le tpoly 										*)
+(* Trace: tpoly -> string						 		*)
 (********************************************************)
 let rec printTpoly = fun
 (Tvar x) -> x
@@ -210,9 +210,9 @@ let rec printTpoly = fun
 (* Description: Fonction qui étant donné un système d'é	*)
 (* quations et une subsitution renvoie la substitution 	*)
 (* a telle que les tpoly du système puissent être unifi *)
-(* és par a. 											                      *)
-(* Trace: (tpoly * tpoly) list * (tpoly -> tpoly) 		  *)
-(*			-> tpoly -> tpoly						  	                *)
+(* és par a. 											*)
+(* Trace: (tpoly * tpoly) list * (tpoly -> tpoly) 		*)
+(*			-> tpoly -> tpoly						 	*)
 (********************************************************)
 let rec unif = fun 
 ([],s) -> s
@@ -299,13 +299,13 @@ Lconst of constants
 
 (********************************************************) 
 (* Description: Crée une nouvelle variable dans un      *)
-(* environnement donné, de sorte que cette nouvelle 	  *)
-(* variable de type soit libre dans env.				        *)
+(* environnement donné, de sorte que cette nouvelle 	*)
+(* variable de type soit libre dans env.				*)
 (* RAPPEL: une variable considerée comme libre si elle  *)
 (* n'apparait pas dans un environnement: d'ou la        *) 
-(* différence avec le sujet.							              *)
-(* Trace: new_var : new_var : ('a * tpoly) list -> 		  *)
-(*								string = <fun>			                  *)
+(* différence avec le sujet.							*)
+(* Trace: new_var : new_var : ('a * tpoly) list -> 		*)
+(*								string = <fun>			*)
 (********************************************************)
 let new_var = fun env -> 
 	let rec nv = fun n -> fun env -> fun
@@ -315,10 +315,10 @@ let new_var = fun env ->
 
 
 (********************************************************) 
-(* Description: renvoie le type d'une variable d'un 	  *)
-(* environnement										                    *)
-(* Trace: get_env_type : string -> 						          *)
-(*				(string * tpoly) list -> tpoly = <fun>	      *)
+(* Description: renvoie le type d'une variable d'un 	*)
+(* environnement										*)
+(* Trace: get_env_type : string -> 						*)
+(*				(string * tpoly) list -> tpoly = <fun>	*)
 (********************************************************)
 let rec get_env_type = fun (v:string) -> fun 
  [] -> raise (Failure("Var "^v^" undeclared."))		
@@ -346,10 +346,10 @@ get_env_type "x" env1;;
 
 (********************************************************) 
 (* Description: applique une substtution a un environem-*)
-(* ment													                        *)
-(* Trace: get_env_type : (tpoly -> tpoly) -> 			      *)
-(*						(string * tpoly) list -> 		              *)
-(*						(string * tpoly) list = <fun>	            *)
+(* ment													*)
+(* Trace: get_env_type : (tpoly -> tpoly) -> 			*)
+(*						(string * tpoly) list -> 		*)
+(*						(string * tpoly) list = <fun>	*)
 (********************************************************)
 let rec map_unif = fun (sigma:(tpoly->tpoly)) -> fun 
 ([]) -> []
